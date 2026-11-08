@@ -3,96 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Z4W3R14</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      color: #f8fafc;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 24px;
-      padding: 48px;
-      max-width: 640px;
-      width: 90%;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    }
-    h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      letter-spacing: -0.05em;
-      margin-bottom: 12px;
-      background: linear-gradient(to right, #818cf8, #c084fc, #f472b6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    p.subtitle {
-      font-size: 1.125rem;
-      color: #cbd5e1;
-      margin-bottom: 32px;
-      line-height: 1.6;
-    }
-    .links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 12px;
-      color: #f8fafc;
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: all 0.2s;
-    }
-    .link:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-    }
-    .link::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #818cf8;
-      box-shadow: 0 0 8px #818cf8;
-    }
-    .footer {
-      margin-top: 32px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 0.875rem;
-      color: #94a3b8;
-      text-align: center;
-    }
-  </style>
+  <title>Z4W3R14 — Contos de Terror e Suspense</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="card">
-    <h1>Z4W3R14</h1>
-    <p class="subtitle">Bem-vindo ao meu cantinho na web. Um espaço simples, feito com calma e sem pressa.</p>
-    <div class="links">
-      <a href="https://github.com/zambria/Z4W3R14" class="link" target="_blank">Ver no GitHub</a>
-      <a href="#" class="link">Sobre</a>
-      <a href="#" class="link">Contato</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Z4W3R14</a>
+      <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="#contos">Contos</a>
+        <a href="sobre.html">Sobre</a>
+      </nav>
     </div>
-    <div class="footer">
-      Feito com <span style="color:#ef4444">♥</span> por Z4W3R14 &bull; publicado via GitHub Pages
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1>Contos de Terror e Suspense</h1>
+      <p class="hero-sub">Histórias sombrias para ler com a luz acesa.</p>
     </div>
-  </div>
+  </section>
+
+  <section id="contos" class="contos-grid">
+    <div class="container">
+      <h2 class="section-title">Contos</h2>
+      <div class="grid" id="contos-container">
+        <!-- Os contos serão injetados aqui pelo script.js -->
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Z4W3R14 — Contos de Terror e Suspense. Publicado via GitHub Pages.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,308 @@
+/* Z4W3R14 — Contos de Terror e Suspense
+   Tema escuro, sombrio, foco nas histórias */
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #121212;
+  --text: #e8e8e8;
+  --text-muted: #8a8a8a;
+  --accent: #8b0000;      /* vermelho sangue */
+  --accent-hover: #a31616;
+  --border: #2a2a2a;
+  --max-width: 1100px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.site-header {
+  background: rgba(10, 10, 10, 0.8);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.logo:hover {
+  color: var(--accent);
+}
+
+.nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-left: 24px;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: var(--accent);
+}
+
+/* Hero */
+.hero {
+  padding: 100px 0 60px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Contos grid */
+.contos-grid {
+  padding: 60px 0;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  margin-bottom: 32px;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Card de conto */
+.conto-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.conto-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.conto-card .capa {
+  position: relative;
+  height: 200px;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.conto-card .capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+
+.conto-card:hover .capa img {
+  opacity: 1;
+}
+
+.conto-card .capa-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  background: #161616;
+}
+
+.conto-card .conteudo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.conto-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.conto-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.conto-card .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.conto-card .btn:hover {
+  background: var(--accent-hover);
+}
+
+/* Página do conto */
+.conto-page {
+  padding: 40px 0;
+}
+
+.conto-page .capa-grande {
+  width: 100%;
+  height: 400px;
+  background: #161616;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.conto-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.conto-page .meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 32px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.conto-page .texto {
+  font-size: 1.1rem;
+  color: var(--text);
+  line-height: 1.8;
+  max-width: 700px;
+}
+
+.conto-page .texto p {
+  margin-bottom: 24px;
+}
+
+.conto-page .video-wrap {
+  margin: 40px 0;
+  max-width: 700px;
+}
+
+.conto-page .btn-voltar {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.conto-page .btn-voltar:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Sobre */
+.sobre {
+  padding: 60px 0;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.sobre h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.sobre p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Responsivo */
+@media (max-width: 640px) {
+  .hero h1 { font-size: 2rem; }
+  .header-inner { flex-direction: column; height: auto; padding: 16px 0; gap: 12px; }
+  .nav a { margin: 0 12px; }
+}
+</style>

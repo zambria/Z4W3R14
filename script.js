@@ -6,7 +6,7 @@ const contos = [
     id: 'o-espelho-que-chora',
     titulo: 'O Espelho que Chora',
     resumo: 'Ela só queria escovar os dentes. O reflexo no espelho, porém, tinha outros planos.',
-    capa: 'assets/img/conto-o-espelho.svg',
+    capa: 'assets/img/conto-o-espelho.png',
     video: null,
     pagina: 'contos/o-espelho-que-chora.html'
   },

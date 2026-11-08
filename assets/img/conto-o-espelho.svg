@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#0a0a0a"/>
+  <circle cx="400" cy="300" r="200" fill="#1a1a1a" stroke="#3a0000" stroke-width="4"/>
+  <path d="M320 260 Q400 340 480 260" stroke="#6a0000" stroke-width="3" fill="none"/>
+  <circle cx="360" cy="270" r="12" fill="#ff0000"/>
+  <circle cx="440" cy="270" r="12" fill="#ff0000"/>
+  <text x="400" y="450" font-family="Arial" font-size="24" fill="#8a0000" text-anchor="middle">O Espelho que Chora</text>
+  <text x="400" y="480" font-family="Arial" font-size="16" fill="#666666" text-anchor="middle">Terror Psicológico</text>
+</svg>

@@ -6,7 +6,7 @@ const contos = [
     id: 'o-espelho-que-chora',
     titulo: 'O Espelho que Chora',
     resumo: 'Ela só queria escovar os dentes. O reflexo no espelho, porém, tinha outros planos.',
-    capa: 'assets/img/conto-o-espelho.jpg',
+    capa: 'assets/img/conto-o-espelho.svg',
     video: null,
     pagina: 'contos/o-espelho-que-chora.html'
   },
@@ -14,7 +14,7 @@ const contos = [
     id: 'a-ultima-foto',
     titulo: 'A Última Foto',
     resumo: 'A câmera revelou algo que ninguém conseguiu ver a olho nu.',
-    capa: 'assets/img/conto-a-ultima-foto.jpg',
+    capa: 'assets/img/conto-a-ultima-foto.svg',
     video: null,
     pagina: 'contos/a-ultima-foto.html'
   }

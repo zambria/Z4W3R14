@@ -5,12 +5,13 @@
 }
 
 :root {
-  --sangue: #8b0000;
-  --sangue-escuro: #4a0000;
-  --fundo: #050505;
+  --sangue: #6d0000;
+  --sangue-escuro: #3a0000;
+  --sangue-claro: #9d0000;
+  --fundo: #070707;
   --texto: #e8e8e8;
-  --texto-suave: #b0b0b0;
-  --borda: #222;
+  --texto-suave: #a0a0a0;
+  --borda: #1a1a1a;
 }
 
 html, body {
@@ -30,59 +31,112 @@ html, body {
   z-index: 20;
 }
 
-/* ===== BORDAS DE SANGUE ===== */
+/* ===== SANGUE NOS CANTOS DA TELA (escorrendo) ===== */
+.blood-corner {
+  position: fixed;
+  z-index: 15;
+  pointer-events: none;
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+}
+
+.blood-corner.tl { top: 0; left: 0; }
+.blood-corner.tr { top: 0; right: 0; }
+.blood-corner.bl { bottom: 0; left: 0; }
+.blood-corner.br { bottom: 0; right: 0; }
+
+.blood-drop {
+  position: absolute;
+  background: var(--sangue);
+  filter: drop-shadow(0 0 6px rgba(109, 0, 0, 0.6));
+  opacity: 0.9;
+  border-radius: 50%;
+}
+
+/* Gotas que escorrem nos cantos */
+.blood-corner.tl .d1 { top: 12px; left: 8px; width: 10px; height: 16px; transform: rotate(-10deg); }
+.blood-corner.tl .d2 { top: 28px; left: 4px; width: 8px; height: 12px; transform: rotate(-5deg); }
+.blood-corner.tl .d3 { top: 42px; left: 10px; width: 6px; height: 10px; transform: rotate(0deg); }
+
+.blood-corner.tr .d1 { top: 12px; right: 8px; width: 10px; height: 16px; transform: rotate(10deg); }
+.blood-corner.tr .d2 { top: 28px; right: 4px; width: 8px; height: 12px; transform: rotate(5deg); }
+.blood-corner.tr .d3 { top: 42px; right: 10px; width: 6px; height: 10px; transform: rotate(0deg); }
+
+.blood-corner.bl .d1 { bottom: 12px; left: 8px; width: 10px; height: 16px; transform: rotate(170deg); }
+.blood-corner.bl .d2 { bottom: 28px; left: 4px; width: 8px; height: 12px; transform: rotate(175deg); }
+.blood-corner.bl .d3 { bottom: 42px; left: 10px; width: 6px; height: 10px; transform: rotate(180deg); }
+
+.blood-corner.br .d1 { bottom: 12px; right: 8px; width: 10px; height: 16px; transform: rotate(10deg); }
+.blood-corner.br .d2 { bottom: 28px; right: 4px; width: 8px; height: 12px; transform: rotate(5deg); }
+.blood-corner.br .d3 { bottom: 42px; right: 10px; width: 6px; height: 10px; transform: rotate(0deg); }
+
+/* Rastro de escorrimento */
+.blood-streak {
+  position: absolute;
+  background: linear-gradient(to bottom, var(--sangue), var(--sangue-escuro));
+  opacity: 0.8;
+}
+
+.blood-corner.tl .s1 { top: 22px; left: 12px; width: 2px; height: 14px; }
+.blood-corner.tl .s2 { top: 36px; left: 8px; width: 2px; height: 10px; }
+
+.blood-corner.tr .s1 { top: 22px; right: 12px; width: 2px; height: 14px; }
+.blood-corner.tr .s2 { top: 36px; right: 8px; width: 2px; height: 10px; }
+
+.blood-corner.bl .s1 { bottom: 22px; left: 12px; width: 2px; height: 14px; }
+.blood-corner.bl .s2 { bottom: 36px; left: 8px; width: 2px; height: 10px; }
+
+.blood-corner.br .s1 { bottom: 22px; right: 12px; width: 2px; height: 14px; }
+.blood-corner.br .s2 { bottom: 36px; right: 8px; width: 2px; height: 10px; }
+
+/* ===== BORDA SUPERIOR E INFERIOR (gotas finas) ===== */
 .blood-border {
   position: fixed;
   z-index: 15;
   pointer-events: none;
+  left: 0; right: 0;
+  height: 40px;
+  overflow: hidden;
 }
 
-.blood-border.top { top: 0; left: 0; right: 0; height: 70px; }
-.blood-border.bottom { bottom: 0; left: 0; right: 0; height: 70px; }
-.blood-border.left { left: 0; top: 0; bottom: 0; width: 70px; }
-.blood-border.right { right: 0; top: 0; bottom: 0; width: 70px; }
+.blood-border.top { top: 0; }
+.blood-border.bottom { bottom: 0; }
 
-/* Gotas de sangue */
-.blood-drop {
+.small-drop {
   position: absolute;
   background: var(--sangue);
-  border-radius: 45% 55% 50% 50% / 60% 60% 40% 40%;
-  filter: drop-shadow(0 0 8px rgba(139, 0, 0, 0.7));
-  opacity: 0.9;
+  border-radius: 50%;
+  opacity: 0.85;
 }
 
-/* Gotas na borda superior (caindo pra baixo) */
-.blood-border.top .blood-drop { bottom: 10px; }
-
-/* Gotas na borda inferior (caindo pra cima, como respingo) */
-.blood-border.bottom .blood-drop { top: 10px; }
-
-/* Gotas na borda esquerda */
-.blood-border.left .blood-drop { right: 10px; }
-
-/* Gotas na borda direita */
-.blood-border.right .blood-drop { left: 10px; }
+.blood-border.top .small-drop { bottom: 6px; }
+.blood-border.bottom .small-drop { top: 6px; }
 
 /* Janelas com sangue nos cantos */
 .window-blood {
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   background: var(--sangue);
-  border-radius: 50% 0 50% 0;
-  opacity: 0.85;
-  filter: drop-shadow(0 0 6px rgba(139, 0, 0, 0.6));
+  opacity: 0.8;
   pointer-events: none;
   z-index: 15;
+  filter: drop-shadow(0 0 4px rgba(109, 0, 0, 0.5));
 }
+
+.window-tl { top: 0; left: 0; border-radius: 16px 0 0 0; }
+.window-tr { top: 0; right: 0; border-radius: 0 16px 0 0; }
+.window-bl { bottom: 0; left: 0; border-radius: 0 0 0 16px; }
+.window-br { bottom: 0; right: 0; border-radius: 0 0 16px 0; }
 
 /* ===== LAYOUT ===== */
 .site-header {
   position: relative;
   z-index: 20;
-  background: rgba(5, 5, 5, 0.92);
-  border-bottom: 3px solid var(--sangue);
-  padding: 18px 0;
+  background: rgba(7, 7, 7, 0.94);
+  border-bottom: 2px solid var(--sangue);
+  padding: 16px 0;
   backdrop-filter: blur(4px);
 }
 
@@ -96,45 +150,45 @@ html, body {
 }
 
 .logo {
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: bold;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-decoration: none;
   color: var(--texto);
   text-transform: uppercase;
 }
 
-.logo:hover { color: var(--sangue); }
+.logo:hover { color: var(--sangue-claro); }
 
 nav a {
   color: var(--texto-suave);
-  margin-left: 24px;
+  margin-left: 22px;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-nav a:hover { color: var(--sangue); }
+nav a:hover { color: var(--sangue-claro); }
 
 /* Hero */
 .hero {
   position: relative;
   z-index: 20;
-  padding: 100px 0 80px;
+  padding: 110px 0 90px;
   text-align: center;
 }
 
 .hero h1 {
-  font-size: 3.5rem;
-  margin-bottom: 14px;
-  color: var(--sangue);
-  text-shadow: 0 0 12px rgba(139, 0, 0, 0.5), 2px 2px 0 #000;
+  font-size: 3.2rem;
+  margin-bottom: 16px;
+  color: var(--sangue-claro);
+  text-shadow: 0 0 14px rgba(109, 0, 0, 0.5), 2px 2px 0 #000;
   line-height: 1.1;
 }
 
 .subtitle {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: var(--texto-suave);
   margin-bottom: 40px;
   max-width: 600px;
@@ -144,22 +198,22 @@ nav a:hover { color: var(--sangue); }
 
 .btn {
   display: inline-block;
-  background: var(--sangue);
-  color: #fff;
+  background: transparent;
+  color: var(--sangue-claro);
   padding: 14px 34px;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1rem;
-  border: 1px solid var(--sangue-escuro);
+  font-size: 0.95rem;
+  border: 2px solid var(--sangue-claro);
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: 0.3s;
 }
 
 .btn:hover {
-  background: var(--sangue-escuro);
-  border-color: var(--sangue);
-  box-shadow: 0 0 15px rgba(139, 0, 0, 0.6);
+  background: var(--sangue-claro);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(157, 0, 0, 0.5);
 }
 
 /* Intro */
@@ -172,7 +226,7 @@ nav a:hover { color: var(--sangue); }
 }
 
 .intro p {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--texto-suave);
   max-width: 700px;
   margin: 0 auto;
@@ -180,36 +234,24 @@ nav a:hover { color: var(--sangue); }
   font-style: italic;
 }
 
-/* Rodapé */
-.site-footer {
-  position: relative;
-  z-index: 20;
-  margin-top: 60px;
-  padding: 30px 0;
-  text-align: center;
-  font-size: 0.85rem;
-  color: #666;
-  border-top: 1px solid var(--borda);
-}
-
 /* Efeito sutil de tremor nas gotas */
 @keyframes pingue {
-  0%, 100% { transform: translateY(0) rotate(var(--rot)); }
-  50% { transform: translateY(-4px) rotate(var(--rot)); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 
-.blood-drop {
-  animation: pingue 3s ease-in-out infinite;
+.blood-drop, .small-drop {
+  animation: pingue 4s ease-in-out infinite;
 }
 
-.blood-drop:nth-child(even) { animation-delay: 1.2s; }
-.blood-drop:nth-child(3n) { animation-delay: 0.6s; }
+.blood-drop:nth-child(even) { animation-delay: 1.3s; }
+.small-drop:nth-child(even) { animation-delay: 0.8s; }
 
 /* Responsivo */
 @media (max-width: 600px) {
-  .hero h1 { font-size: 2.2rem; }
-  .header-inner { flex-direction: column; gap: 14px; text-align: center; }
-  nav a { margin: 0 10px; }
-  .blood-border.top, .blood-border.bottom { height: 50px; }
-  .blood-border.left, .blood-border.right { width: 50px; }
+  .hero h1 { font-size: 2.1rem; }
+  .header-inner { flex-direction: column; gap: 12px; text-align: center; }
+  nav a { margin: 0 8px; }
+  .blood-corner { width: 60px; height: 60px; }
+  .blood-border { height: 30px; }
 }

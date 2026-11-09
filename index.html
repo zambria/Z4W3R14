@@ -7,6 +7,8 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
+  --sangue: #8b0000;
+  --sangue-vivo: #b20000;
   --fundo: #070707;
   --texto: #e8e8e8;
   --texto-suave: #a0a0a0;
@@ -24,7 +26,7 @@ html, body {
 .site-header {
   position: relative; z-index: 20;
   background: rgba(7, 7, 7, 0.94);
-  border-bottom: 1px solid var(--borda);
+  border-bottom: 2px solid var(--sangue);
   padding: 16px 0; backdrop-filter: blur(4px);
 }
 .header-inner {
@@ -32,23 +34,23 @@ html, body {
   max-width: 900px; margin: 0 auto; padding: 0 20px;
 }
 .logo {
-  font-size: 1.8rem; font-weight: bold;
+  font-size: 1.8rem; font-weight: bold; letter-spacing: 1px;
   text-decoration: none; color: var(--texto); text-transform: uppercase;
-  letter-spacing: 1px;
 }
-.logo:hover { color: var(--texto); }
+.logo:hover { color: var(--sangue-vivo); }
 nav a {
   color: var(--texto-suave); margin-left: 22px;
   text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;
 }
-nav a:hover { color: var(--texto); }
+nav a:hover { color: var(--sangue-vivo); }
 .hero {
   position: relative; z-index: 20;
   padding: 110px 0 90px; text-align: center;
 }
 .hero h1 {
   font-size: 3.2rem; margin-bottom: 16px;
-  color: var(--texto);
+  color: var(--sangue-vivo);
+  text-shadow: 0 0 14px rgba(139, 0, 0, 0.5), 2px 2px 0 #000;
   text-transform: uppercase;
   letter-spacing: 2px;
   line-height: 1.1;
@@ -60,12 +62,12 @@ nav a:hover { color: var(--texto); }
 }
 .btn {
   display: inline-block; background: transparent;
-  color: var(--texto); padding: 14px 34px;
+  color: var(--sangue-vivo); padding: 14px 34px;
   text-decoration: none; font-weight: bold; font-size: 0.95rem;
-  border: 1px solid var(--texto); text-transform: uppercase; letter-spacing: 1px;
+  border: 2px solid var(--sangue-vivo); text-transform: uppercase; letter-spacing: 1px;
   transition: 0.3s;
 }
-.btn:hover { background: var(--texto); color: #000; }
+.btn:hover { background: var(--sangue-vivo); color: #fff; box-shadow: 0 0 20px rgba(178, 0, 0, 0.5); }
 .intro {
   position: relative; z-index: 20;
   padding: 70px 0;

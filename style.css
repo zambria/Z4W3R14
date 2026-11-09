@@ -1,337 +1,215 @@
-/* Z4W3R14 — Contos de Terror e Suspense
-   Tema escuro, sombrio, foco nas histórias */
-
-:root {
-  --bg: #0a0a0a;
-  --bg-card: #121212;
-  --text: #e8e8e8;
-  --text-muted: #8a8a8a;
-  --accent: #8b0000;      /* vermelho sangue */
-  --accent-hover: #a31616;
-  --border: #2a2a2a;
-  --max-width: 1100px;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+:root {
+  --sangue: #8b0000;
+  --sangue-escuro: #4a0000;
+  --fundo: #050505;
+  --texto: #e8e8e8;
+  --texto-suave: #b0b0b0;
+  --borda: #222;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+html, body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: "Georgia", "Times New Roman", serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .container {
-  max-width: var(--max-width);
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 20px;
+  position: relative;
+  z-index: 20;
 }
 
-/* Header */
+/* ===== BORDAS DE SANGUE ===== */
+.blood-border {
+  position: fixed;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.blood-border.top { top: 0; left: 0; right: 0; height: 70px; }
+.blood-border.bottom { bottom: 0; left: 0; right: 0; height: 70px; }
+.blood-border.left { left: 0; top: 0; bottom: 0; width: 70px; }
+.blood-border.right { right: 0; top: 0; bottom: 0; width: 70px; }
+
+/* Gotas de sangue */
+.blood-drop {
+  position: absolute;
+  background: var(--sangue);
+  border-radius: 45% 55% 50% 50% / 60% 60% 40% 40%;
+  filter: drop-shadow(0 0 8px rgba(139, 0, 0, 0.7));
+  opacity: 0.9;
+}
+
+/* Gotas na borda superior (caindo pra baixo) */
+.blood-border.top .blood-drop { bottom: 10px; }
+
+/* Gotas na borda inferior (caindo pra cima, como respingo) */
+.blood-border.bottom .blood-drop { top: 10px; }
+
+/* Gotas na borda esquerda */
+.blood-border.left .blood-drop { right: 10px; }
+
+/* Gotas na borda direita */
+.blood-border.right .blood-drop { left: 10px; }
+
+/* Janelas com sangue nos cantos */
+.window-blood {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: var(--sangue);
+  border-radius: 50% 0 50% 0;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(139, 0, 0, 0.6));
+  pointer-events: none;
+  z-index: 15;
+}
+
+/* ===== LAYOUT ===== */
 .site-header {
-  background: rgba(10, 10, 10, 0.8);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: relative;
+  z-index: 20;
+  background: rgba(5, 5, 5, 0.92);
+  border-bottom: 3px solid var(--sangue);
+  padding: 18px 0;
   backdrop-filter: blur(4px);
 }
 
 .header-inner {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  height: 64px;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--text);
+  font-size: 1.6rem;
+  font-weight: bold;
+  letter-spacing: 3px;
   text-decoration: none;
+  color: var(--texto);
   text-transform: uppercase;
 }
 
-.logo:hover {
-  color: var(--accent);
-}
+.logo:hover { color: var(--sangue); }
 
-.nav a {
-  color: var(--text-muted);
-  text-decoration: none;
+nav a {
+  color: var(--texto-suave);
   margin-left: 24px;
+  text-decoration: none;
   font-size: 0.95rem;
-  transition: color 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.nav a:hover {
-  color: var(--accent);
-}
+nav a:hover { color: var(--sangue); }
 
 /* Hero */
 .hero {
-  padding: 100px 0 60px;
+  position: relative;
+  z-index: 20;
+  padding: 100px 0 80px;
   text-align: center;
 }
 
 .hero h1 {
-  font-size: 3rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 16px;
-  color: var(--text);
+  font-size: 3.5rem;
+  margin-bottom: 14px;
+  color: var(--sangue);
+  text-shadow: 0 0 12px rgba(139, 0, 0, 0.5), 2px 2px 0 #000;
+  line-height: 1.1;
 }
 
-.hero-sub {
-  font-size: 1.15rem;
-  color: var(--text-muted);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Contos grid */
-.contos-grid {
-  padding: 60px 0;
-}
-
-.section-title {
-  font-size: 1.75rem;
-  margin-bottom: 32px;
-  color: var(--text);
-  letter-spacing: -0.01em;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-}
-
-/* Card de conto */
-.conto-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s, border-color 0.2s;
-}
-
-.conto-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent);
-}
-
-.conto-card .capa {
-  position: relative;
-  height: 200px;
-  background: #1a1a1a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.conto-card .capa img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.85;
-  transition: opacity 0.3s;
-}
-
-.conto-card:hover .capa img {
-  opacity: 1;
-}
-
-.conto-card .capa-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  background: #161616;
-}
-
-.conto-card .conteudo {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.conto-card h3 {
+.subtitle {
   font-size: 1.25rem;
-  margin-bottom: 10px;
-  color: var(--text);
-}
-
-.conto-card p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 20px;
-  flex: 1;
-}
-
-.conto-card .btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background: var(--accent);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-align: center;
-  transition: background 0.2s;
-}
-
-.conto-card .btn:hover {
-  background: var(--accent-hover);
-}
-
-/* Página do conto */
-.conto-page {
-  padding: 40px 0;
-}
-
-.conto-page .capa-grande {
-  width: 100%;
-  height: 400px;
-  background: #161616;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  margin-bottom: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  font-size: 1rem;
-}
-
-.conto-page h1 {
-  font-size: 2.5rem;
-  margin-bottom: 16px;
-  color: var(--text);
-}
-
-.conto-page .meta {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-bottom: 32px;
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.conto-page .texto {
-  font-size: 1.1rem;
-  color: var(--text);
-  line-height: 1.8;
-  max-width: 700px;
-}
-
-.conto-page .texto p {
-  margin-bottom: 24px;
-}
-
-.conto-page .video-wrap {
-  margin: 40px 0;
-  max-width: 700px;
-}
-
-.conto-page .btn-voltar {
-  display: inline-block;
-  margin-top: 40px;
-  padding: 10px 20px;
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.2s;
-}
-
-.conto-page .btn-voltar:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* Lista de capítulos */
-.capitulos-lista {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin: 32px 0;
-}
-
-.btn-cap {
-  display: block;
-  padding: 16px 24px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  color: var(--text);
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 600;
-  transition: all 0.2s;
-  text-align: left;
-}
-
-.btn-cap:hover {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-  transform: translateX(-4px);
-}
-
-/* Sobre */
-.sobre {
-  padding: 60px 0;
-  text-align: center;
+  color: var(--texto-suave);
+  margin-bottom: 40px;
   max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--sangue);
+  color: #fff;
+  padding: 14px 34px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  border: 1px solid var(--sangue-escuro);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: var(--sangue-escuro);
+  border-color: var(--sangue);
+  box-shadow: 0 0 15px rgba(139, 0, 0, 0.6);
+}
+
+/* Intro */
+.intro {
+  position: relative;
+  z-index: 20;
+  padding: 70px 0;
+  border-top: 1px solid var(--borda);
+  border-bottom: 1px solid var(--borda);
+}
+
+.intro p {
+  font-size: 1.15rem;
+  color: var(--texto-suave);
+  max-width: 700px;
   margin: 0 auto;
-}
-
-.sobre h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: var(--text);
-}
-
-.sobre p {
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 16px;
-}
-
-/* Footer */
-.site-footer {
-  border-top: 1px solid var(--border);
-  padding: 32px 0;
   text-align: center;
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  font-style: italic;
 }
+
+/* Rodapé */
+.site-footer {
+  position: relative;
+  z-index: 20;
+  margin-top: 60px;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+  border-top: 1px solid var(--borda);
+}
+
+/* Efeito sutil de tremor nas gotas */
+@keyframes pingue {
+  0%, 100% { transform: translateY(0) rotate(var(--rot)); }
+  50% { transform: translateY(-4px) rotate(var(--rot)); }
+}
+
+.blood-drop {
+  animation: pingue 3s ease-in-out infinite;
+}
+
+.blood-drop:nth-child(even) { animation-delay: 1.2s; }
+.blood-drop:nth-child(3n) { animation-delay: 0.6s; }
 
 /* Responsivo */
-@media (max-width: 640px) {
-  .hero h1 { font-size: 2rem; }
-  .header-inner { flex-direction: column; height: auto; padding: 16px 0; gap: 12px; }
-  .nav a { margin: 0 12px; }
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2.2rem; }
+  .header-inner { flex-direction: column; gap: 14px; text-align: center; }
+  nav a { margin: 0 10px; }
+  .blood-border.top, .blood-border.bottom { height: 50px; }
+  .blood-border.left, .blood-border.right { width: 50px; }
 }
-</style>

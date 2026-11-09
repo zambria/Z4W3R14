@@ -5,9 +5,9 @@
 }
 
 :root {
-  --sangue: #6d0000;
-  --sangue-escuro: #3a0000;
-  --sangue-claro: #9d0000;
+  --sangue: #8b0000;
+  --sangue-escuro: #4a0000;
+  --sangue-vivo: #b20000;
   --fundo: #070707;
   --texto: #e8e8e8;
   --texto-suave: #a0a0a0;
@@ -31,104 +31,193 @@ html, body {
   z-index: 20;
 }
 
-/* ===== SANGUE NOS CANTOS DA TELA (escorrendo) ===== */
-.blood-corner {
+/* ===== SANGUE ESCORRENDO NAS BORDAS DA TELA ===== */
+.blood-overlay {
   position: fixed;
-  z-index: 15;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  width: 90px;
-  height: 90px;
+  z-index: 15;
   overflow: hidden;
 }
 
-.blood-corner.tl { top: 0; left: 0; }
-.blood-corner.tr { top: 0; right: 0; }
-.blood-corner.bl { bottom: 0; left: 0; }
-.blood-corner.br { bottom: 0; right: 0; }
+/* Camada superior: sangue escorrendo do topo */
+.blood-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  overflow: visible;
+}
 
-.blood-drop {
+.drip {
   position: absolute;
   background: var(--sangue);
-  filter: drop-shadow(0 0 6px rgba(109, 0, 0, 0.6));
   opacity: 0.9;
-  border-radius: 50%;
+  filter: drop-shadow(0 0 6px rgba(139, 0, 0, 0.5));
+  animation: drip-fall 4s ease-in-out infinite;
 }
 
-/* Gotas que escorrem nos cantos */
-.blood-corner.tl .d1 { top: 12px; left: 8px; width: 10px; height: 16px; transform: rotate(-10deg); }
-.blood-corner.tl .d2 { top: 28px; left: 4px; width: 8px; height: 12px; transform: rotate(-5deg); }
-.blood-corner.tl .d3 { top: 42px; left: 10px; width: 6px; height: 10px; transform: rotate(0deg); }
+.drip.head {
+  border-radius: 50% 50% 40% 40%;
+}
 
-.blood-corner.tr .d1 { top: 12px; right: 8px; width: 10px; height: 16px; transform: rotate(10deg); }
-.blood-corner.tr .d2 { top: 28px; right: 4px; width: 8px; height: 12px; transform: rotate(5deg); }
-.blood-corner.tr .d3 { top: 42px; right: 10px; width: 6px; height: 10px; transform: rotate(0deg); }
+.drip.trail {
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, var(--sangue-vivo), var(--sangue-escuro));
+}
 
-.blood-corner.bl .d1 { bottom: 12px; left: 8px; width: 10px; height: 16px; transform: rotate(170deg); }
-.blood-corner.bl .d2 { bottom: 28px; left: 4px; width: 8px; height: 12px; transform: rotate(175deg); }
-.blood-corner.bl .d3 { bottom: 42px; left: 10px; width: 6px; height: 10px; transform: rotate(180deg); }
+/* Gotas escorrendo do topo (espalhadas) */
+.d1 { left: 5%; width: 16px; height: 22px; animation-delay: 0s; }
+.d1 .head { width: 16px; height: 12px; left: 0; top: 0; }
+.d1 .trail { left: 7px; top: 12px; height: 10px; animation-delay: 0.5s; }
 
-.blood-corner.br .d1 { bottom: 12px; right: 8px; width: 10px; height: 16px; transform: rotate(10deg); }
-.blood-corner.br .d2 { bottom: 28px; right: 4px; width: 8px; height: 12px; transform: rotate(5deg); }
-.blood-corner.br .d3 { bottom: 42px; right: 10px; width: 6px; height: 10px; transform: rotate(0deg); }
+.d2 { left: 18%; width: 10px; height: 16px; animation-delay: 1.2s; }
+.d2 .head { width: 10px; height: 6px; left: 0; top: 0; }
+.d2 .trail { left: 4px; top: 6px; height: 10px; animation-delay: 1.7s; }
 
-/* Rastro de escorrimento */
-.blood-streak {
+.d3 { left: 32%; width: 20px; height: 28px; animation-delay: 0.6s; }
+.d3 .head { width: 20px; height: 14px; left: 0; top: 0; }
+.d3 .trail { left: 9px; top: 14px; height: 14px; animation-delay: 1.1s; }
+
+.d4 { left: 48%; width: 12px; height: 18px; animation-delay: 1.8s; }
+.d4 .head { width: 12px; height: 7px; left: 0; top: 0; }
+.d4 .trail { left: 5px; top: 7px; height: 11px; animation-delay: 2.3s; }
+
+.d5 { left: 62%; width: 18px; height: 24px; animation-delay: 0.3s; }
+.d5 .head { width: 18px; height: 11px; left: 0; top: 0; }
+.d5 .trail { left: 8px; top: 11px; height: 13px; animation-delay: 0.8s; }
+
+.d6 { left: 75%; width: 14px; height: 20px; animation-delay: 1.5s; }
+.d6 .head { width: 14px; height: 8px; left: 0; top: 0; }
+.d6 .trail { left: 6px; top: 8px; height: 12px; animation-delay: 2.0s; }
+
+.d7 { left: 88%; width: 11px; height: 15px; animation-delay: 2.4s; }
+.d7 .head { width: 11px; height: 6px; left: 0; top: 0; }
+.d7 .trail { left: 4px; top: 6px; height: 9px; animation-delay: 2.9s; }
+
+.d8 { left: 94%; width: 17px; height: 25px; animation-delay: 0.9s; }
+.d8 .head { width: 17px; height: 10px; left: 0; top: 0; }
+.d8 .trail { left: 8px; top: 10px; height: 15px; animation-delay: 1.4s; }
+
+/* Camada lateral esquerda */
+.blood-left {
   position: absolute;
-  background: linear-gradient(to bottom, var(--sangue), var(--sangue-escuro));
-  opacity: 0.8;
+  top: 120px;
+  left: 0;
+  width: 80px;
+  height: calc(100% - 240px);
+  overflow: visible;
 }
 
-.blood-corner.tl .s1 { top: 22px; left: 12px; width: 2px; height: 14px; }
-.blood-corner.tl .s2 { top: 36px; left: 8px; width: 2px; height: 10px; }
+.ldrip { position: absolute; background: var(--sangue); opacity: 0.85; filter: drop-shadow(0 0 5px rgba(139,0,0,0.4)); animation: drip-fall 5s ease-in-out infinite; }
+.ldrip.head { border-radius: 50% 50% 40% 40%; }
+.ldrip.trail { width: 2.5px; background: linear-gradient(to bottom, var(--sangue-vivo), var(--sangue-escuro)); }
 
-.blood-corner.tr .s1 { top: 22px; right: 12px; width: 2px; height: 14px; }
-.blood-corner.tr .s2 { top: 36px; right: 8px; width: 2px; height: 10px; }
+.ld1 { top: 10%; left: 8px; width: 14px; height: 18px; animation-delay: 0s; }
+.ld1 .head { width: 14px; height: 9px; left: 0; top: 0; }
+.ld1 .trail { left: 6px; top: 9px; height: 9px; animation-delay: 0.5s; }
 
-.blood-corner.bl .s1 { bottom: 22px; left: 12px; width: 2px; height: 14px; }
-.blood-corner.bl .s2 { bottom: 36px; left: 8px; width: 2px; height: 10px; }
+.ld2 { top: 35%; left: 4px; width: 10px; height: 14px; animation-delay: 1.4s; }
+.ld2 .head { width: 10px; height: 6px; left: 0; top: 0; }
+.ld2 .trail { left: 4px; top: 6px; height: 8px; animation-delay: 1.9s; }
 
-.blood-corner.br .s1 { bottom: 22px; right: 12px; width: 2px; height: 14px; }
-.blood-corner.br .s2 { bottom: 36px; right: 8px; width: 2px; height: 10px; }
+.ld3 { top: 60%; left: 10px; width: 12px; height: 16px; animation-delay: 0.8s; }
+.ld3 .head { width: 12px; height: 7px; left: 0; top: 0; }
+.ld3 .trail { left: 5px; top: 7px; height: 9px; animation-delay: 1.3s; }
 
-/* ===== BORDA SUPERIOR E INFERIOR (gotas finas) ===== */
-.blood-border {
-  position: fixed;
-  z-index: 15;
-  pointer-events: none;
-  left: 0; right: 0;
-  height: 40px;
-  overflow: hidden;
+.ld4 { top: 82%; left: 6px; width: 11px; height: 13px; animation-delay: 2.1s; }
+.ld4 .head { width: 11px; height: 6px; left: 0; top: 0; }
+.ld4 .trail { left: 3px; top: 6px; height: 7px; animation-delay: 2.6s; }
+
+/* Camada lateral direita */
+.blood-right {
+  position: absolute;
+  top: 120px;
+  right: 0;
+  width: 80px;
+  height: calc(100% - 240px);
+  overflow: visible;
 }
 
-.blood-border.top { top: 0; }
-.blood-border.bottom { bottom: 0; }
+.rdrip { position: absolute; background: var(--sangue); opacity: 0.85; filter: drop-shadow(0 0 5px rgba(139,0,0,0.4)); animation: drip-fall 5s ease-in-out infinite; }
+.rdrip.head { border-radius: 50% 50% 40% 40%; }
+.rdrip.trail { width: 2.5px; background: linear-gradient(to bottom, var(--sangue-vivo), var(--sangue-escuro)); }
 
-.small-drop {
+.rd1 { top: 8%; right: 10px; width: 13px; height: 17px; animation-delay: 0.5s; }
+.rd1 .head { width: 13px; height: 8px; right: 0; top: 0; }
+.rd1 .trail { right: 5px; top: 8px; height: 9px; animation-delay: 1.0s; }
+
+.rd2 { top: 30%; right: 6px; width: 11px; height: 15px; animation-delay: 1.9s; }
+.rd2 .head { width: 11px; height: 6px; right: 0; top: 0; }
+.rd2 .trail { right: 4px; top: 6px; height: 9px; animation-delay: 2.4s; }
+
+.rd3 { top: 55%; right: 9px; width: 15px; height: 19px; animation-delay: 1.1s; }
+.rd3 .head { width: 15px; height: 9px; right: 0; top: 0; }
+.rd3 .trail { right: 7px; top: 9px; height: 10px; animation-delay: 1.6s; }
+
+.rd4 { top: 78%; right: 5px; width: 9px; height: 12px; animation-delay: 2.5s; }
+.rd4 .head { width: 9px; height: 5px; right: 0; top: 0; }
+.rd4 .trail { right: 3px; top: 5px; height: 7px; animation-delay: 3.0s; }
+
+/* Camada inferior: respingos sutis */
+.blood-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  overflow: visible;
+}
+
+.splash {
   position: absolute;
   background: var(--sangue);
+  opacity: 0.7;
   border-radius: 50%;
-  opacity: 0.85;
+  animation: splash-bounce 5s ease-in-out infinite;
 }
 
-.blood-border.top .small-drop { bottom: 6px; }
-.blood-border.bottom .small-drop { top: 6px; }
+.sp1 { left: 10%; bottom: 10px; width: 9px; height: 9px; animation-delay: 0s; }
+.sp2 { left: 25%; bottom: 5px; width: 6px; height: 6px; animation-delay: 1.1s; }
+.sp3 { left: 42%; bottom: 12px; width: 8px; height: 8px; animation-delay: 2.2s; }
+.sp4 { left: 60%; bottom: 8px; width: 7px; height: 7px; animation-delay: 0.6s; }
+.sp5 { left: 78%; bottom: 14px; width: 10px; height: 10px; animation-delay: 1.7s; }
+.sp6 { left: 90%; bottom: 6px; width: 5px; height: 5px; animation-delay: 2.8s; }
 
 /* Janelas com sangue nos cantos */
 .window-blood {
   position: absolute;
-  width: 16px;
-  height: 16px;
-  background: var(--sangue);
+  width: 14px;
+  height: 14px;
+  background: var(--sangue-vivo);
   opacity: 0.8;
   pointer-events: none;
   z-index: 15;
-  filter: drop-shadow(0 0 4px rgba(109, 0, 0, 0.5));
+  filter: drop-shadow(0 0 4px rgba(139, 0, 0, 0.5));
 }
 
-.window-tl { top: 0; left: 0; border-radius: 16px 0 0 0; }
-.window-tr { top: 0; right: 0; border-radius: 0 16px 0 0; }
-.window-bl { bottom: 0; left: 0; border-radius: 0 0 0 16px; }
-.window-br { bottom: 0; right: 0; border-radius: 0 0 16px 0; }
+.window-tl { top: 0; left: 0; border-radius: 14px 0 0 0; }
+.window-tr { top: 0; right: 0; border-radius: 0 14px 0 0; }
+.window-bl { bottom: 0; left: 0; border-radius: 0 0 0 14px; }
+.window-br { bottom: 0; right: 0; border-radius: 0 0 14px 0; }
+
+/* Animações */
+@keyframes drip-fall {
+  0%, 100% { transform: translateY(0); opacity: 0.9; }
+  40% { transform: translateY(12px); opacity: 0.95; }
+  60% { transform: translateY(14px); opacity: 0.85; }
+  80% { transform: translateY(10px); opacity: 0.9; }
+}
+
+@keyframes splash-bounce {
+  0%, 100% { transform: scale(1) translateY(0); opacity: 0.7; }
+  50% { transform: scale(1.2) translateY(-3px); opacity: 0.8; }
+}
 
 /* ===== LAYOUT ===== */
 .site-header {
@@ -158,7 +247,7 @@ html, body {
   text-transform: uppercase;
 }
 
-.logo:hover { color: var(--sangue-claro); }
+.logo:hover { color: var(--sangue-vivo); }
 
 nav a {
   color: var(--texto-suave);
@@ -169,7 +258,7 @@ nav a {
   letter-spacing: 1px;
 }
 
-nav a:hover { color: var(--sangue-claro); }
+nav a:hover { color: var(--sangue-vivo); }
 
 /* Hero */
 .hero {
@@ -182,8 +271,8 @@ nav a:hover { color: var(--sangue-claro); }
 .hero h1 {
   font-size: 3.2rem;
   margin-bottom: 16px;
-  color: var(--sangue-claro);
-  text-shadow: 0 0 14px rgba(109, 0, 0, 0.5), 2px 2px 0 #000;
+  color: var(--sangue-vivo);
+  text-shadow: 0 0 14px rgba(139, 0, 0, 0.5), 2px 2px 0 #000;
   line-height: 1.1;
 }
 
@@ -199,21 +288,21 @@ nav a:hover { color: var(--sangue-claro); }
 .btn {
   display: inline-block;
   background: transparent;
-  color: var(--sangue-claro);
+  color: var(--sangue-vivo);
   padding: 14px 34px;
   text-decoration: none;
   font-weight: bold;
   font-size: 0.95rem;
-  border: 2px solid var(--sangue-claro);
+  border: 2px solid var(--sangue-vivo);
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: 0.3s;
 }
 
 .btn:hover {
-  background: var(--sangue-claro);
+  background: var(--sangue-vivo);
   color: #fff;
-  box-shadow: 0 0 20px rgba(157, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(178, 0, 0, 0.5);
 }
 
 /* Intro */
@@ -234,24 +323,22 @@ nav a:hover { color: var(--sangue-claro); }
   font-style: italic;
 }
 
-/* Efeito sutil de tremor nas gotas */
-@keyframes pingue {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+/* Rodapé */
+.site-footer {
+  position: relative;
+  z-index: 20;
+  margin-top: 60px;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+  border-top: 1px solid var(--borda);
 }
-
-.blood-drop, .small-drop {
-  animation: pingue 4s ease-in-out infinite;
-}
-
-.blood-drop:nth-child(even) { animation-delay: 1.3s; }
-.small-drop:nth-child(even) { animation-delay: 0.8s; }
 
 /* Responsivo */
 @media (max-width: 600px) {
   .hero h1 { font-size: 2.1rem; }
   .header-inner { flex-direction: column; gap: 12px; text-align: center; }
   nav a { margin: 0 8px; }
-  .blood-corner { width: 60px; height: 60px; }
-  .blood-border { height: 30px; }
+  .blood-overlay { display: none; }
 }
